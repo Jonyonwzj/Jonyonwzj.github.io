@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>Happy Birthday</title>
+    <style type="text/css">
+        @font-face {
+            font-family: digit;
+            src: url('/fonts/digital-7_mono.ttf') format("truetype");
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/time.css">
+    <link rel="stylesheet" type="text/css" href="css/last_style.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/garden.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <link rel="icon" type="image/png" href="生日蛋糕.png">
+</head>
+
+<body>
+    <div id="mainDiv">
+        <div id="content">
+            <div id="loveHeart">
+                <canvas id="garden"></canvas>
+                <div id="words">
+                    <div id="messages">
+                        <p id="front">祝 李玲同学 生日快乐</p>
+                        <div id="elapseClock"></div>
+                    </div>
+                    <div id="loveu">
+                        <div class="cake" style="margin-right: 140px; display: none;"></div>
+                        <p id="hope">遇见你 我很幸运 可能我给不了你太多惊喜和感动 但是我会陪你 很久很久</p>
+                        <div class="signature">- Jay</div>
+                    </div>
+                    <div id="cake">
+                        <div class="cake" style="left: 20px;top: 20px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="copyright">
+            <br><br><br><br>Powered by <a href="http://www.jonyonwzj.top" target="_blank">Jay</a> .<br />
+            Copyright&nbsp;&copy;&nbsp;2022&nbsp;
+            <strong><a href="http://www.jonyonwzj.top" target="_blank">jonyonwzj.top</a></strong>
+            &nbsp;&nbsp;All Rights Reserved.<br><br>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var offsetX = $("#loveHeart").width() / 2;
+        var offsetY = $("#loveHeart").height() / 2 - 55;
+        var displayMode = 1;
+        var together = new Date();
+        together.setFullYear(1999, 12, 15);
+        together.setHours(0);
+        together.setMinutes(0);
+        together.setSeconds(0);
+        together.setMilliseconds(0);
+        
+        $("#loveHeart").click(function(){
+            displayMode *= -1;
+            timeElapse(together, displayMode);
+        });
+        
+        if (!document.createElement('canvas').getContext) {
+            var msg = document.createElement("div");
+            msg.id = "errorMsg";
+            msg.innerHTML = "你的浏览器不支持HTML5!<br/>请使用Chrome 14+/IE 9+/Firefox 7+/Safari 4+"; 
+            document.body.appendChild(msg);
+            $("#code").css("display", "none")
+            $("#copyright").css("position", "absolute");
+            $("#copyright").css("bottom", "10px");
+            document.execCommand("stop");
+        } else {
+            setTimeout(function () {
+                adjustWordsPosition();
+                startHeartAnimation();
+            }, 3000);
+
+            timeElapse(together, displayMode);
+            setInterval(function () {
+                timeElapse(together, displayMode);
+            }, 500);
+
+            adjustCodePosition();
+            $("#code").typewriter();
+        }
+    </script>
+</body>
+</html>
